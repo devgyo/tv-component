@@ -10,8 +10,7 @@
   },
   "peerDependencies": {
     "react": ">=18",
-    "next": ">=13",
-    "@tippyjs/react": ">=4"
+    "next": ">=13"
   },
   "keywords": [],
   "author": "",

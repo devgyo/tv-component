@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Image from 'next/image';
-import Tippy from '@tippyjs/react';
 
 import { GlassBar } from './GlassBar';
 import { GlassIconButton } from './GlassIconButton';
@@ -190,12 +189,8 @@ export function Bar({
           {barItemsShown.watchlist ? (
             <>
               <div className="flex items-center gap-1.5">
-                <Tippy
-                  content={selectedStockForChart ? "Ticker" : "Watchlist"}
-                  placement="top"
-                  delay={[200, 0]}
-                >
-                  <button
+                <button
+                    title={selectedStockForChart ? "Ticker" : "Watchlist"}
                     ref={watchlistButtonRef}
                     type="button"
                     onClick={() => {
@@ -254,7 +249,6 @@ export function Bar({
                       </>
                     )}
                   </button>
-                </Tippy>
                 <div className="h-4 w-px shrink-0 bg-white/20" aria-hidden />
               </div>
             </>
@@ -290,13 +284,9 @@ export function Bar({
             ]
               .filter(({ key }) => barItemsShown[key])
               .map(({ key, label, icon }) => (
-                <Tippy
+                <button
                   key={key}
-                  content={label}
-                  placement="top"
-                  delay={[200, 0]}
-                >
-                  <button
+                  title={label}
                     type="button"
                     onClick={() => toggleView(key)}
                     aria-label={label}
@@ -316,10 +306,9 @@ export function Bar({
                       strokeWidth={1.33}
                     />
                   </button>
-                </Tippy>
               ))}
-            <Tippy content="更多" placement="top" delay={[200, 0]}>
-              <button
+            <button
+                title="更多"
                 type="button"
                 onClick={(e) => {
                   const rect = (
@@ -335,7 +324,6 @@ export function Bar({
               >
                 <Icon name="dots" className="h-5 w-5" strokeWidth={1.33} />
               </button>
-            </Tippy>
           </div>
         </GlassBar>
         <GlassIconButton
