@@ -30,13 +30,7 @@ type WatchlistPopoverRect = {
 };
 
 export type BarProps = {
-  /** 外层包裹，用于拖动时拿到定位信息；不传则不支持拖动 */
-  toolbarWrapRef?: React.RefObject<HTMLDivElement | null>;
-  /** 拖动后的固定位置，null 为底部居中；不传则不支持拖动 */
-  toolbarPosition?: { x: number; y: number } | null;
-  /** 拖动开始回调；不传则隐藏拖动手柄 */
-  onToolbarDragStart?: () => void;
-  /** 是否处于拖动动画中 */
+  /** 是否处于切换 Ticker 时的入场动画中 */
   barAnimating?: boolean;
 
   /** 玻璃 Bar 样式参数 */
@@ -85,9 +79,6 @@ export type BarProps = {
 };
 
 export function Bar({
-  toolbarWrapRef,
-  toolbarPosition,
-  onToolbarDragStart,
   barAnimating,
   barBgColor,
   barBorderColor,
@@ -120,41 +111,12 @@ export function Bar({
   onAlertClick,
   onSearchClick,
 }: BarProps) {
-  const pos = toolbarPosition ?? null;
   return (
-    <div
-      ref={toolbarWrapRef}
-      className={`page-fade-in z-30 ${
-        pos === null ? "fixed bottom-4 left-1/2 -translate-x-1/2" : ""
-      }`}
-      style={
-        pos !== null
-          ? {
-              position: "fixed",
-              left: pos.x,
-              top: pos.y,
-            }
-          : undefined
-      }
-    >
+    <div className="page-fade-in z-30 fixed bottom-4 left-1/2 -translate-x-1/2">
       <div
         className={`flex items-center gap-2 ${barAnimating ? "bar-ticker-enter" : ""}`}
         style={{ fontFamily: "var(--font-inter)" }}
       >
-        {onToolbarDragStart ? (
-          <div
-            role="button"
-            tabIndex={0}
-            aria-label="拖动工具栏"
-            className="flex cursor-grab items-center justify-center rounded-full p-1.5 text-white/60 outline-none active:cursor-grabbing hover:bg-white/10 hover:text-white/80 focus-visible:ring-2 focus-visible:ring-[#444] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a1a1a]"
-            onMouseDown={(e) => {
-              e.preventDefault();
-              onToolbarDragStart();
-            }}
-          >
-            <Icon name="grip" className="h-4 w-4" />
-          </div>
-        ) : null}
         {selectedStockForChart ? (
           <GlassIconButton
             backgroundColor={barBgColor}
