@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { hexToRgba, adjustBorderColor } from './color-utils';
+import { hexToRgba } from './color-utils';
 import { Icon } from './Icon';
 
 type Stock = {
@@ -14,6 +14,18 @@ type Stock = {
 const DEFAULT_WATCHLIST_LABEL = 'Watchlist';
 
 export type BarIconHoverPreset = 'none' | 'subtle' | 'medium';
+
+/** 样式默认值（非颜色，颜色由项目层 --bar-bg、--bar-border 提供） */
+const DEFAULT_TOOLBAR_OPACITY = 1;
+const DEFAULT_TOOLBAR_BLUR = 24;
+const DEFAULT_TOOLBAR_BORDER_WIDTH = 1;
+const DEFAULT_TOOLBAR_HIGHLIGHT = 0.15;
+const DEFAULT_TOOLBAR_HIGHLIGHT_HEIGHT = 1;
+const DEFAULT_TOOLBAR_SHADOW_STRENGTH = 1;
+const DEFAULT_ACCENT_HIGHLIGHT_VISIBLE = true;
+const DEFAULT_TOOLBAR_ACCENT_OPACITY = 0.22;
+const DEFAULT_TOOLBAR_ACCENT_GRADIENT_STOP = 0.6;
+const DEFAULT_BAR_ICON_HOVER_PRESET: BarIconHoverPreset = 'medium';
 
 const BAR_ICON_HOVER_CLASS: Record<BarIconHoverPreset, string> = {
   none: '',
@@ -32,21 +44,18 @@ export type BarProps = {
   /** 是否处于切换 Ticker 时的入场动画中 */
   barAnimating?: boolean;
 
-  /** 玻璃 Bar 样式参数 */
-  barBgColor: string;
-  barBorderColor: string;
-  toolbarOpacity: number;
-  toolbarBlur: number;
-  toolbarBorderBrightness: number;
-  toolbarBorderWidth: number;
-  toolbarBorderGradientContrast: number;
-  toolbarHighlight: number;
-  toolbarHighlightHeight: number;
-  toolbarShadowStrength: number;
-  accentHighlightVisible: boolean;
+  /** 玻璃 Bar 样式参数（可选，有默认值；颜色由 --bar-bg、--bar-border 提供） */
+  toolbarOpacity?: number;
+  toolbarBlur?: number;
+  toolbarBorderWidth?: number;
+  toolbarHighlight?: number;
+  toolbarHighlightHeight?: number;
+  toolbarShadowStrength?: number;
+  accentHighlightVisible?: boolean;
   accentColor?: string;
-  toolbarAccentOpacity: number;
-  toolbarAccentGradientStop: number;
+  toolbarAccentOpacity?: number;
+  toolbarAccentGradientStop?: number;
+  barIconHoverPreset?: BarIconHoverPreset;
 
   /** 当前 view / Ticker 上下文 */
   selectedStockForChart: Stock | null;
@@ -65,7 +74,6 @@ export type BarProps = {
   toggleView: (
     key: "ticker" | "event" | "news" | "options" | "snapshot" | "darkpool",
   ) => void;
-  barIconHoverPreset: BarIconHoverPreset;
 
   /** 更多菜单 */
   barDotsPopoverRect: DOMRect | null;
@@ -78,13 +86,9 @@ export type BarProps = {
 };
 
 function BarGlassIconButton({
-  backgroundColor,
-  borderColor,
   opacity,
   blur,
-  borderBrightness,
   borderWidth,
-  borderGradientContrast,
   highlightOpacity,
   highlightHeight,
   shadowStrength,
@@ -93,13 +97,9 @@ function BarGlassIconButton({
   onClick,
   children,
 }: {
-  backgroundColor: string;
-  borderColor: string;
   opacity: number;
   blur: number;
-  borderBrightness: number;
   borderWidth: number;
-  borderGradientContrast: number;
   highlightOpacity: number;
   highlightHeight: number;
   shadowStrength: number;
@@ -108,15 +108,6 @@ function BarGlassIconButton({
   onClick?: () => void;
   children: React.ReactNode;
 }) {
-  const topColor = adjustBorderColor(
-    borderColor,
-    borderBrightness + 0.25 * borderGradientContrast,
-  );
-  const midColor = adjustBorderColor(borderColor, borderBrightness);
-  const bottomColor = adjustBorderColor(
-    borderColor,
-    borderBrightness - 0.15 * borderGradientContrast,
-  );
   const shadowAlpha = Math.max(
     0,
     Math.min(1, 0.2 + 0.4 * shadowStrength),
@@ -133,7 +124,7 @@ function BarGlassIconButton({
         width: size,
         height: size,
         padding: borderWidth,
-        backgroundImage: `linear-gradient(to bottom, ${topColor}, ${midColor}, ${bottomColor})`,
+        backgroundImage: 'linear-gradient(to bottom, var(--bar-border), var(--bar-border), var(--bar-border))',
         transform: `scale(${scale})`,
         transition: 'transform 150ms cubic-bezier(0.4,0,0.2,1)',
       }}
@@ -144,10 +135,7 @@ function BarGlassIconButton({
         onClick={onClick}
         className="relative flex h-full w-full items-center justify-center rounded-full text-white/80 outline-none"
         style={{
-          backgroundColor: hexToRgba(
-            backgroundColor,
-            hovered ? Math.max(0, Math.min(1, opacity - 0.2)) : opacity,
-          ),
+          backgroundColor: `color-mix(in srgb, var(--bar-bg) ${(hovered ? Math.max(0, Math.min(1, opacity - 0.2)) : opacity) * 100}%, transparent)`,
           backdropFilter: blur > 0 ? `blur(${blur}px)` : 'none',
           boxShadow: `0 18px 45px rgba(0,0,0,${shadowAlpha})`,
           fontFamily: 'var(--font-inter)',
@@ -181,20 +169,16 @@ function BarGlassIconButton({
 
 export function Bar({
   barAnimating,
-  barBgColor,
-  barBorderColor,
-  toolbarOpacity,
-  toolbarBlur,
-  toolbarBorderBrightness,
-  toolbarBorderWidth,
-  toolbarBorderGradientContrast,
-  toolbarHighlight,
-  toolbarHighlightHeight,
-  toolbarShadowStrength,
-  accentHighlightVisible,
+  toolbarOpacity = DEFAULT_TOOLBAR_OPACITY,
+  toolbarBlur = DEFAULT_TOOLBAR_BLUR,
+  toolbarBorderWidth = DEFAULT_TOOLBAR_BORDER_WIDTH,
+  toolbarHighlight = DEFAULT_TOOLBAR_HIGHLIGHT,
+  toolbarHighlightHeight = DEFAULT_TOOLBAR_HIGHLIGHT_HEIGHT,
+  toolbarShadowStrength = DEFAULT_TOOLBAR_SHADOW_STRENGTH,
+  accentHighlightVisible = DEFAULT_ACCENT_HIGHLIGHT_VISIBLE,
   accentColor,
-  toolbarAccentOpacity,
-  toolbarAccentGradientStop,
+  toolbarAccentOpacity = DEFAULT_TOOLBAR_ACCENT_OPACITY,
+  toolbarAccentGradientStop = DEFAULT_TOOLBAR_ACCENT_GRADIENT_STOP,
   selectedStockForChart,
   selectedWatchlist,
   currentWatchlistColor,
@@ -205,22 +189,13 @@ export function Bar({
   viewVisible,
   barItemsShown,
   toggleView,
-  barIconHoverPreset,
+  barIconHoverPreset = DEFAULT_BAR_ICON_HOVER_PRESET,
   barDotsPopoverRect,
   setBarDotsPopoverRect,
   alertOn,
   onAlertClick,
   onSearchClick,
 }: BarProps) {
-  const topColor = adjustBorderColor(
-    barBorderColor,
-    toolbarBorderBrightness + 0.25 * toolbarBorderGradientContrast,
-  );
-  const midColor = adjustBorderColor(barBorderColor, toolbarBorderBrightness);
-  const bottomColor = adjustBorderColor(
-    barBorderColor,
-    toolbarBorderBrightness - 0.15 * toolbarBorderGradientContrast,
-  );
   const shadowAlpha = Math.max(
     0,
     Math.min(1, 0.2 + 0.4 * toolbarShadowStrength),
@@ -236,13 +211,9 @@ export function Bar({
       >
         {selectedStockForChart ? (
           <BarGlassIconButton
-            backgroundColor={barBgColor}
-            borderColor={barBorderColor}
             opacity={toolbarOpacity}
             blur={toolbarBlur}
-            borderBrightness={toolbarBorderBrightness}
             borderWidth={toolbarBorderWidth}
-            borderGradientContrast={toolbarBorderGradientContrast}
             highlightOpacity={toolbarHighlight}
             highlightHeight={toolbarHighlightHeight}
             shadowStrength={toolbarShadowStrength}
@@ -261,13 +232,13 @@ export function Bar({
           className="relative rounded-full"
           style={{
             padding: toolbarBorderWidth,
-            backgroundImage: `linear-gradient(to bottom, ${topColor}, ${midColor}, ${bottomColor})`,
+            backgroundImage: 'linear-gradient(to bottom, var(--bar-border), var(--bar-border), var(--bar-border))',
           }}
         >
           <div
             className="relative flex items-center gap-2 rounded-full bg-white/5 p-1"
             style={{
-              backgroundColor: hexToRgba(barBgColor, currentAlpha),
+              backgroundColor: `color-mix(in srgb, var(--bar-bg) ${currentAlpha * 100}%, transparent)`,
               backdropFilter: toolbarBlur > 0 ? `blur(${toolbarBlur}px)` : 'none',
               boxShadow: `0 18px 45px rgba(0,0,0,${shadowAlpha})`,
               height: barHeight,
@@ -444,13 +415,9 @@ export function Bar({
         </div>
 
         <BarGlassIconButton
-          backgroundColor={barBgColor}
-          borderColor={barBorderColor}
           opacity={toolbarOpacity}
           blur={toolbarBlur}
-          borderBrightness={toolbarBorderBrightness}
           borderWidth={toolbarBorderWidth}
-          borderGradientContrast={toolbarBorderGradientContrast}
           highlightOpacity={toolbarHighlight}
           highlightHeight={toolbarHighlightHeight}
           shadowStrength={toolbarShadowStrength}
@@ -467,13 +434,9 @@ export function Bar({
           </span>
         </BarGlassIconButton>
         <BarGlassIconButton
-          backgroundColor={barBgColor}
-          borderColor={barBorderColor}
           opacity={toolbarOpacity}
           blur={toolbarBlur}
-          borderBrightness={toolbarBorderBrightness}
           borderWidth={toolbarBorderWidth}
-          borderGradientContrast={toolbarBorderGradientContrast}
           highlightOpacity={toolbarHighlight}
           highlightHeight={toolbarHighlightHeight}
           shadowStrength={toolbarShadowStrength}
