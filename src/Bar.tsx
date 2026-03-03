@@ -31,7 +31,7 @@ type WatchlistPopoverRect = {
 
 export type BarProps = {
   /** 外层包裹，用于拖动时拿到定位信息 */
-  toolbarWrapRef: React.RefObject<HTMLDivElement>;
+  toolbarWrapRef: React.RefObject<HTMLDivElement | null>;
   toolbarPosition: { x: number; y: number } | null;
   onToolbarDragStart: () => void;
   barAnimating: boolean;
@@ -61,7 +61,7 @@ export type BarProps = {
   /** Watchlist/Ticker 下拉 */
   watchlistPopoverRect: WatchlistPopoverRect | null;
   setWatchlistPopoverRect: (rect: WatchlistPopoverRect | null) => void;
-  watchlistButtonRef: React.RefObject<HTMLButtonElement>;
+  watchlistButtonRef: React.RefObject<HTMLButtonElement | null>;
 
   /** 中间 view 切换 */
   viewVisible: Record<string, boolean>;
