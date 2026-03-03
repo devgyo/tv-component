@@ -21,8 +21,8 @@ export function Icon({ name, className, strokeWidth }: IconProps) {
     case 'list':
       return (
         <svg className={c} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M5.29 15.48L7.74 17.73L12.4 11.22" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
-          <path d="M16.41 11.9H20M16.04 11.9H19.62M4 6.22H20M13.54 17.78H20" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M5.29004 15.4803L7.73581 17.7263L12.4016 11.2227" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M16.4135 11.9036H20M16.036 11.9036H19.6225M4 6.21875H19.9996M13.5437 17.7801H19.9997" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
         </svg>
       );
     case 'dots':
@@ -34,6 +34,15 @@ export function Icon({ name, className, strokeWidth }: IconProps) {
         </svg>
       );
     case 'options':
+      return (
+        <svg className={c} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path fillRule="evenodd" clipRule="evenodd" d="M7.2917 20.0014C5.92604 20.0014 4.81836 18.8937 4.81836 17.528C4.81836 16.1624 5.92604 15.0547 7.2917 15.0547C8.65735 15.0547 9.76503 16.1624 9.76503 17.528C9.76503 18.8937 8.65735 20.0014 7.2917 20.0014Z" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path fillRule="evenodd" clipRule="evenodd" d="M16.7097 14.4076C15.344 14.4076 14.2363 13.2999 14.2363 11.9343C14.2363 10.5686 15.344 9.46094 16.7097 9.46094C18.0753 9.46094 19.183 10.5686 19.183 11.9343C19.183 13.2999 18.0753 14.4076 16.7097 14.4076Z" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M16.7284 14.4062V15.5752C16.7284 16.6838 15.8302 17.582 14.7217 17.582H9.76562" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path fillRule="evenodd" clipRule="evenodd" d="M7.2917 8.94667C5.92604 8.94667 4.81836 7.83899 4.81836 6.47334C4.81836 5.10768 5.92604 4 7.2917 4C8.65735 4 9.76503 5.10768 9.76503 6.47334C9.76503 7.83899 8.65735 8.94667 7.2917 8.94667Z" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M7.29102 8.94531V15.052" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+        </svg>
+      );
     case 'settings':
       return (
         <svg className={c} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,48 +72,50 @@ export function Icon({ name, className, strokeWidth }: IconProps) {
         <svg className={c} fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path fillRule="evenodd" clipRule="evenodd" d="M12.0013 17.3556C7.25587 17.3556 5.06075 16.7211 4.84863 14.1728C4.84863 11.6274 6.37919 11.7899 6.37919 8.66555C6.37919 6.22426 8.59766 3.44824 12.0013 3.44824C15.4049 3.44824 17.6234 6.22426 17.6234 8.66458C17.6234 11.7889 19.1539 11.6255 19.1539 14.1728C18.9408 16.7299 16.7457 17.3556 12.0013 17.3556Z" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
           <path d="M9.98438 20C10.4757 20.614 11.2133 21.0003 12.0287 21.0003C12.8538 21.0003 13.5913 20.614 14.0827 20" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M6.07171 3.00781C5.124 3.92926 4.43024 5.04433 4.04492 6.20222" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M19.9555 6.21192C19.5692 5.05306 18.8764 3.9302 17.9199 3" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
         </svg>
       );
     case 'bell-minus':
       return (
         <svg className={c} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M6.74 16.62C5.52 16.13 4.89 15.31 4.78 14C4.78 11.39 6.34 11.55 6.34 8.35C6.34 5.84 8.62 3 12.11 3" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
-          <path d="M17.97 9.54C18.3 11.56 19.45 11.77 19.45 14C19.23 16.62 16.98 17.27 12.11 17.27" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
-          <path d="M10.05 20C10.55 20.61 11.21 21 12.03 21C12.85 21 13.59 20.61 14.08 20" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
-          <path d="M4.39 19L19.61 3.75" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M6.7398 16.6165C5.51582 16.13 4.88535 15.3118 4.77832 13.9983C4.77832 11.3879 6.34381 11.5494 6.34381 8.3464C6.34381 5.84395 8.62053 3 12.1125 3C14.5517 3 16.3876 4.38549 17.2876 6.06871" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M17.9691 9.53711C18.298 11.5609 19.448 11.7662 19.448 13.9981C19.232 16.6173 16.9816 17.2653 12.1129 17.2653C11.4075 17.2653 10.7605 17.2536 10.168 17.2205" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M10.0459 19.9736C10.5499 20.6031 11.3059 21.0001 12.1426 21.0001C12.9891 21.0001 13.7451 20.6031 14.2491 19.9736" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M4.38672 18.9738L19.6145 3.74609" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
         </svg>
       );
     case 'event':
       return (
         <svg className={c} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M3.98 9.66H20.03" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
-          <path d="M15.64 3V5.96" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
-          <path d="M8.37 3V5.96" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
-          <path fillRule="evenodd" clipRule="evenodd" d="M15.81 4.42H8.19C5.55 4.42 3.9 5.89 3.9 8.6V16.75C3.9 19.49 5.55 21 8.19 21H15.81C18.46 21 20.1 19.52 20.1 16.81V8.6C20.11 5.89 18.47 4.42 15.81 4.42Z" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
-          <path d="M14.25 15.08H9.75" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M3.98389 9.66447H20.0253" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M15.6388 3V5.96174" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M8.36832 3V5.96174" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path fillRule="evenodd" clipRule="evenodd" d="M15.8145 4.42139H8.19413C5.55056 4.42139 3.90039 5.8935 3.90039 8.59935V16.7451C3.90039 19.4938 5.55056 20.9999 8.19413 20.9999H15.8067C18.4581 20.9999 20.1004 19.52 20.1004 16.8132V8.59935C20.1082 5.8935 18.4658 4.42139 15.8145 4.42139Z" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M14.2495 15.0766H9.74951" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
         </svg>
       );
     case 'news':
       return (
         <svg className={c} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M7.06 19.9L6.3 20.27C5.5 20.65 4.58 20.07 4.59 19.18L4.59 6.92C4.59 4.5 5.94 3 8.36 3H15.66C18.08 3 19.4 4.5 19.4 6.92L19.42 19.18C19.42 20.06 18.49 20.65 17.69 20.26L16.94 19.9C16.49 19.69 15.96 19.67 15.5 19.86L13.35 20.74C12.49 21.09 11.52 21.09 10.65 20.74L8.51 19.86C8.04 19.67 7.52 19.69 7.06 19.9Z" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
-          <path d="M14.83 14.2H9.17M14.83 9.8H9.17" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M7.06405 19.9023L6.30417 20.2661C5.50537 20.6485 4.58106 20.0657 4.58203 19.1793L4.59176 6.92492C4.59176 4.50225 5.93931 3 8.35809 3H15.6572C18.0818 3 19.4002 4.50225 19.4002 6.92492L19.4177 19.1774C19.4187 20.0638 18.4944 20.6475 17.6946 20.2642L16.9406 19.9032C16.4872 19.6853 15.9627 19.6697 15.4967 19.8604L13.3503 20.7351C12.4854 21.0883 11.5153 21.0883 10.6504 20.7351L8.50792 19.8604C8.04188 19.6697 7.51745 19.6853 7.06405 19.9023Z" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M14.8287 14.1972H9.17188M14.8287 9.80273H9.17188" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
         </svg>
       );
     case 'snapshot':
       return (
         <svg className={c} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M6.78 21H17.22C19.05 21 20.54 19.51 20.54 17.68V10.5C20.54 9.61 20.14 8.77 19.45 8.21L13.87 3.67C12.78 2.78 11.22 2.78 10.13 3.67L4.55 8.21C3.86 8.77 3.46 9.61 3.46 10.5V17.68C3.46 19.51 4.95 21 6.78 21Z" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
-          <path d="M7.62 15.91L10.43 12.26L13.63 14.77L16.38 11.23" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M6.78418 21.001H17.2156C19.0506 21.001 20.5373 19.5133 20.5373 17.6792V10.5054C20.5373 9.61412 20.1365 8.77054 19.4456 8.20718L13.8714 3.66723C12.7817 2.77889 11.2181 2.77889 10.1283 3.66723L4.55409 8.20718C3.86327 8.77054 3.4624 9.61412 3.4624 10.5054V17.6792C3.4624 19.5133 4.94913 21.001 6.78418 21.001Z" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M7.62451 15.9072L10.4299 12.2621L13.6299 14.7746L16.3751 11.2313" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
         </svg>
       );
     case 'darkpool':
       return (
         <svg className={c} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M18.47 8.89C18.74 9.69 18.89 10.55 18.89 11.45C18.89 15.84 15.33 19.4 10.95 19.4C6.56 19.4 3 15.84 3 11.45C3 7.06 6.56 3.5 10.95 3.5C12.43 3.5 13.81 3.91 15 4.62" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
-          <path d="M20.9 6.33L15.02 11.78L12.49 9.02L8.23 13.04" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
-          <path d="M18.05 6.17L21 6.17L21 9.11" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
-          <path d="M16.35 17.27L19.59 20.49" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M18.4677 8.88589C18.7421 9.69051 18.891 10.5535 18.891 11.4515C18.891 15.8395 15.3339 19.3975 10.946 19.3975C6.55705 19.3975 3 15.8395 3 11.4515C3 7.06358 6.55705 3.50653 10.946 3.50653C12.4258 3.50653 13.8122 3.91127 14.9992 4.61665" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M20.8961 6.3252L15.0245 11.7795L12.4861 9.02217L8.23047 13.0385" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M18.0527 6.17284L20.9959 6.16895L21.0007 9.1111" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
+          <path d="M16.3535 17.2705L19.5866 20.4948" strokeLinecap="round" strokeLinejoin="round" strokeWidth={sw} />
         </svg>
       );
     default:

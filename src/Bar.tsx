@@ -14,10 +14,12 @@ type Stock = {
 
 const DEFAULT_WATCHLIST_LABEL = 'Watchlist';
 
-type BarIconHoverPreset = 'default';
+export type BarIconHoverPreset = 'none' | 'subtle' | 'medium';
 
 const BAR_ICON_HOVER_CLASS: Record<BarIconHoverPreset, string> = {
-  default: 'hover:bg-white/10',
+  none: '',
+  subtle: 'hover:bg-white/5',
+  medium: 'hover:bg-white/10',
 };
 
 type WatchlistPopoverRect = {
@@ -183,6 +185,13 @@ export function Bar({
           highlightOpacity={toolbarHighlight}
           highlightHeight={toolbarHighlightHeight}
           shadowStrength={toolbarShadowStrength}
+          {...(accentHighlightVisible && accentColor
+            ? {
+                accentColor: accentColor,
+                accentOpacity: toolbarAccentOpacity,
+                accentGradientStop: toolbarAccentGradientStop,
+              }
+            : {})}
           role="toolbar"
           ariaLabel="View 切换"
         >
